@@ -181,8 +181,6 @@ BEGIN CATCH
 		ERROR_STATE()
 END CATCH
 
-select * from dbo.departments
-
 /* This is a pretty standard employee and asset tracking database */
 
 /* 
