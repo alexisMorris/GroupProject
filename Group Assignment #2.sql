@@ -156,6 +156,33 @@ DROP TABLE ComputerStatuses
 */
 
 
+-- Stored procedures -
+CREATE OR ALTER PROCEDURE sqlPandas_CreateNewDept
+	@deptName varchar(50)
+AS
+BEGIN TRY
+	
+	IF @deptName NOT IN (SELECT Department FROM dbo.Departments)
+		BEGIN
+			INSERT INTO dbo.Departments (Department) VALUES (@deptName)
+		END
+	ELSE
+		BEGIN
+			PRINT 'That department already exists. Try a different department name.'
+		END
+
+END TRY
+BEGIN CATCH
+	SELECT
+		ERROR_NUMBER(),
+		ERROR_MESSAGE(),
+		ERROR_SEVERITY(),
+		ERROR_LINE(),
+		ERROR_STATE()
+END CATCH
+
+select * from dbo.departments
+
 /* This is a pretty standard employee and asset tracking database */
 
 /* 
@@ -256,5 +283,3 @@ Once you're done, you'll need to test everything out by hiring/firing employees,
 	triggers.
 
 Include your lengthly script as part of your submission
-
-
